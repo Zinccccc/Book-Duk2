@@ -13,6 +13,8 @@ pip3 install tkinter
 pip3 install pandas
 pip3 install webdriver_manager
 pip3 install openpyxl
+pip3 install selenium
+pip3 install bs4
 ```
 
 macOS에서 tkinter가 설치되지 않는 경우, brew를 이용해 아래 명령어로 설치한다.
