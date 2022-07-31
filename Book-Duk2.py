@@ -71,11 +71,14 @@ driver.find_element(By.ID, 'SMemberID').send_keys(user_id)
 driver.find_element(By.ID, 'SMemberPassword').send_keys(user_pw)
 driver.find_element(By.ID, 'btnLogin').click()
 
+
+print(len(orders))
+print(f"=====카트 담기 시작(전체 {len(orders)} 항목)=====")
 failed_cnt=0
 success_cnt=0
 for order in orders:
     failed=False
-    log=order.name+"님의 책 \""+order.title+"\""
+    log=f"{order.name}님의 책 \"{order.title}\""
     error_reason=""
     driver.get(order.link)
     html=driver.page_source
@@ -91,19 +94,18 @@ for order in orders:
             error_reason="카트에 추가할 수 없습니다.(품절, 절판)"
             failed=True
     else:
-        error_reason="금액이 맞지 않습니다.(입력:"+user_value+", 실제:"+site_value+")"
+        error_reason=f"금액이 맞지 않습니다.(입력:{user_value}, 실제:{site_value}"
         failed=True
     if(failed):
-        print("[실패] %s :%s"%(log, error_reason))
-        print("\t링크 : "+order.link)
+        print(f"[실패] {log} : {error_reason}\n\t링크 : {order.link}")
         failed_cnt+=1
     else:
-        print("%s 추가 완료"%log)
+        print(f"{log} 추가 완료")
         success_cnt+=1
 
-print("=====카트 담기 완료(성공 : %d 실패 : %d)====="%(success_cnt, failed_cnt))
+print(f"=====카트 담기 완료(성공 : {success_cnt} 실패 : {failed_cnt})=====")
 #장바구니로 이동
 driver.get("https://ssl.yes24.com/dMyCart/CartMain")
 
-print("주문 완료 후 엔터를 입력하세요. 브라우저가 종료됩니다.")
+print("주문 완료 후 엔터를 입력하세요.")
 input()
