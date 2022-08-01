@@ -72,7 +72,6 @@ driver.find_element(By.ID, 'SMemberPassword').send_keys(user_pw)
 driver.find_element(By.ID, 'btnLogin').click()
 
 
-print(len(orders))
 print(f"=====카트 담기 시작(전체 {len(orders)} 항목)=====")
 failed_cnt=0
 success_cnt=0
